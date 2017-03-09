@@ -1,0 +1,10 @@
+﻿<!--?xml version="1.0" encoding="utf-8" ?-->
+<charttypes>
+  <chart name="PieChart=" number="0="></chart>
+  <chart name="ClusteredColumnChart=" number="1="></chart>
+  <chart name="ClusteredBarChart=" number="2="></chart>
+  <chart name="DoughnutChart=" number="3="></chart>
+  <chart name="StackedColumnChart=" number="4="></chart>
+  <chart name="StackedBarChart=" number="5="></chart>
+  <chart name="RadialGaugeChart=" number="6="></chart>
+</charttypes>
