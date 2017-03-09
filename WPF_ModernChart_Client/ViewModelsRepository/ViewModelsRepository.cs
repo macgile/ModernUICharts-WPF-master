@@ -23,7 +23,7 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
     /// </summary>
     public class ChartsViewModel : INotifyPropertyChanged
     {
-        private ProxyAdapter adapter;
+        private readonly ProxyAdapter adapter;
 
         private ObservableCollection<ChartNameStore> _ChartsInfo;
 
@@ -58,7 +58,7 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
             {
                 _CountryRegionName = value;
                 IsRadioButtonEnabled = true;
-                onPropertyChanged("CountryRegionName");
+                OnPropertyChanged("CountryRegionName");
             }
         }
 
@@ -70,7 +70,7 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
             set
             {
                 _IsRadioButtonEnabled = value;
-                onPropertyChanged("IsRadioButtonEnabled");
+                OnPropertyChanged("IsRadioButtonEnabled");
             }
         }
 
@@ -103,15 +103,15 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
             if (CountryRegionName != null)
             {
                 SalesData.Clear();
-                var Res = (from sale in await adapter.GetSalesInformation()
+                var res = (from sale in await adapter.GetSalesInformation()
                            where sale.CountryRegionCode == CountryRegionName.CountryRegion
                            select new
                            {
-                               Name = sale.Name,
+                               sale.Name,
                                SaleYTD = sale.SalesYTD
                            }).ToList();
 
-                foreach (var item in Res)
+                foreach (var item in res)
                 {
                     SalesData.Add(new SalesInfo() { Name = item.Name, Sales = item.SaleYTD });
                 }
@@ -126,15 +126,15 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
             if (CountryRegionName != null)
             {
                 SalesData.Clear();
-                var Res = (from sale in await adapter.GetSalesInformation()
+                var res = (from sale in await adapter.GetSalesInformation()
                            where sale.CountryRegionCode == CountryRegionName.CountryRegion
                            select new
                            {
-                               Name = sale.Name,
-                               SalesLastYear = sale.SalesLastYear
+                               sale.Name,
+                               sale.SalesLastYear
                            }).ToList();
 
-                foreach (var item in Res)
+                foreach (var item in res)
                 {
                     SalesData.Add(new SalesInfo() { Name = item.Name, Sales = item.SalesLastYear });
                 }
@@ -146,13 +146,13 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
         /// </summary>
         public async void GetCountryRegionCodeGroup()
         {
-            var Res = (from cr in await adapter.GetSalesInformation()
+            var res = (from cr in await adapter.GetSalesInformation()
                        group cr by cr.CountryRegionCode into crg
                        select new CountryRegionCode()
                        {
                            CountryRegion = crg.Key
                        });
-            foreach (var item in Res.ToList())
+            foreach (var item in res.ToList())
             {
                 CountryRegion.Add(item);
             }
@@ -160,12 +160,9 @@ namespace WPF_ModernChart_Client.ViewModelsRepository
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void onPropertyChanged(string pName)
+        private void OnPropertyChanged(string pName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(pName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pName));
         }
     }
 }

@@ -5,11 +5,11 @@ namespace WPF_ModernChart_Client.Commands
 {
     public class RelayCommand : ICommand
     {
-        Action _handler;
+        Action handler;
 
         public RelayCommand(Action h)
         {
-            _handler =  h;
+            handler =  h;
         }
 
         public bool CanExecute(object parameter)
@@ -21,7 +21,7 @@ namespace WPF_ModernChart_Client.Commands
 
         public void Execute(object parameter)
         {
-            _handler();
+            handler();
         }
     }
 }

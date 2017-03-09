@@ -20,7 +20,7 @@ namespace WPF_ModernChart_Client.HelperClasses
     /// </summary>
     public class ChartTypeHelper
     {
-        ObservableCollection<ChartNameStore> _ChartsNames;
+        ObservableCollection<ChartNameStore> chartsNames;
 
         /// <summary>
         /// The Method Load the Xml file and return chart names.
@@ -28,23 +28,35 @@ namespace WPF_ModernChart_Client.HelperClasses
         /// <returns></returns>
         public ObservableCollection<ChartNameStore> GetChartNames()
         {
-            _ChartsNames = new ObservableCollection<ChartNameStore>(); 
+            chartsNames = new ObservableCollection<ChartNameStore>(); 
 
-            XDocument xDoc = XDocument.Load("ChartNames.xml");
+            var xDoc = XDocument.Load("ChartNames.xml");
 
-            var Charts = from c in xDoc.Descendants("ChartTypes").Elements("Chart")
+            var charts = from c in xDoc.Descendants("ChartTypes").Elements("Chart")
                          select c;
 
-            foreach (var item in Charts)
+            var child = xDoc.Descendants("ChartTypes").Elements("Chart").Elements();
+            var child_ = xDoc.Descendants("ChartTypes").Elements("Chart");
+
+            //foreach (var child in xDoc.Descendants("ChartTypes").Elements("Chart").Elements())
+            //    Console.WriteLine($"{child.Name} : {child.Value}");
+
+
+
+
+            foreach (var item in charts)
             {
-                _ChartsNames.Add(new ChartNameStore()
+                Console.WriteLine(item.Value);
+
+
+                chartsNames.Add(new ChartNameStore()
                 { 
-                 Name =  item.Attribute("Name").Value,
-                 Number =Convert.ToInt32(item.Attribute("Number").Value)
+                 Name = item.Attribute("Name")?.Value,
+                 Number =Convert.ToInt32(item.Attribute("Number")?.Value)
                 });
             }
 
-            return _ChartsNames;
+            return chartsNames;
 
         }
     }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\FromC\Win8_Laptop\Mahesh_NET45\Articles\WPF45\Modern_Charts_Service_New\WebApi_Service\Models\AdventureWorksEDMX.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Gilles\GitHub\ModernUICharts-WPF-master\WebApi_Service\Models\AdventureWorksEDMX.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

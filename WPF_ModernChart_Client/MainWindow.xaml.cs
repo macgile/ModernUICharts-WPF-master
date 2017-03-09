@@ -1,23 +1,11 @@
-﻿using De.TorstenMandelkow.MetroChart;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WPF_ModernChart_Client.HelperClasses;
-using WPF_ModernChart_Client.ModelClasses;
-using WPF_ModernChart_Client.ViewModelsRepository;
 using WPF_ModernChart_Client.ChartControls;
+using WPF_ModernChart_Client.HelperClasses;
+using WPF_ModernChart_Client.ViewModelsRepository;
+
+// http://www.dotnetcurry.com/wpf/1027/wpf-charts-using-modern-chart-library
+
 
 namespace WPF_ModernChart_Client
 {
@@ -26,75 +14,66 @@ namespace WPF_ModernChart_Client
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        ChartsViewModel vm;
-
-         
         /// <summary>
-        /// The Constructor set the DataContext of the Window to an object of 
-        /// the ViewModel class.
+        /// The Constructor set the DataContext of the Window to an object of the ViewModel class.
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            vm = new ChartsViewModel();
-            this.DataContext = vm;
+            var vm = new ChartsViewModel();
+            DataContext = vm;
         }
 
- 
         /// <summary>
-        /// The method gets executed when the chart is selected from the ComboBox.
-        /// The method add the UserControl in the Grid of name grdChartContainer
-        /// based upon the chart name selected from the ComboBox.
+        /// The method gets executed when the chart is selected from the ComboBox. The method add the
+        /// UserControl in the Grid of name grdChartContainer based upon the chart name selected from
+        /// the ComboBox.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void lstcharttype_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            grdChartContainer.Children.Clear();
+            GrdChartContainer.Children.Clear();
 
+            var chartType = Lstcharttype.SelectedItem as ChartNameStore;
 
-            var chartType = lstcharttype.SelectedItem as ChartNameStore;
-
-            switch (chartType.Name)
+            switch (chartType?.Name)
             {
                 case "PieChart":
-                    PieChartUserControl pie = new PieChartUserControl();
-                    pie.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(pie);
+                    var pie = new PieChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(pie);
                     break;
+
                 case "ClusteredColumnChart":
-                    ClusteredColumnChartUserControl ccchart = new ClusteredColumnChartUserControl();
-                    ccchart.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(ccchart);
+                    var ccchart = new ClusteredColumnChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(ccchart);
                     break;
+
                 case "ClusteredBarChart":
-                    ClusteredBarChartUserControl cbchart = new ClusteredBarChartUserControl();
-                    cbchart.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(cbchart);
+                    var cbchart = new ClusteredBarChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(cbchart);
                     break;
+
                 case "DoughnutChart":
-                    DoughnutChartUserControl dnchart = new DoughnutChartUserControl();
-                    dnchart.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(dnchart);
+                    var dnchart = new DoughnutChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(dnchart);
                     break;
+
                 case "StackedColumnChart":
-                    StackedColumnChartUserControl stcchart = new StackedColumnChartUserControl();
-                    stcchart.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(stcchart);
+                    var stcchart = new StackedColumnChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(stcchart);
                     break;
+
                 case "StackedBarChart":
-                    StackedBarChartUserControl stbchart = new StackedBarChartUserControl();
-                    stbchart.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(stbchart);
+                    var stbchart = new StackedBarChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(stbchart);
                     break;
+
                 case "RadialGaugeChart":
-                    RadialGaugeChartUserControl rgchart = new RadialGaugeChartUserControl();
-                    rgchart.DataContext = grdChartContainer.DataContext;
-                    grdChartContainer.Children.Add(rgchart);
+                    var rgchart = new RadialGaugeChartUserControl { DataContext = GrdChartContainer.DataContext };
+                    GrdChartContainer.Children.Add(rgchart);
                     break;
             }
-
         }
     }
 }

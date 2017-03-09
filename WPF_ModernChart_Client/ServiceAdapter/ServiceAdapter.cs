@@ -23,7 +23,7 @@ namespace WPF_ModernChart_Client.ServiceAdapter
                 webClient.DefaultRequestHeaders.Accept.Clear();
                 webClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage resp = await webClient.GetAsync("api/SalesTerritories");
+                var resp = await webClient.GetAsync("api/SalesTerritories");
 
                 if (resp.IsSuccessStatusCode)
                 {

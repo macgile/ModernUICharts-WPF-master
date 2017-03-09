@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6fcb1361866948f0841ffb7505c6e03d" Name="Diagram1">
-        <EntityTypeShape EntityType="AdventureWorks2012Model.SalesTerritory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdventureWorks2012Model.SalesTerritory" Width="3.625" PointX="4.625" PointY="1.25" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
